@@ -89,14 +89,14 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="site-header-primary-section-right site-header-section ast-flex ast-grid-right-section">
-                  <div className="ast-builder-menu-1 ast-builder-menu ast-flex ast-builder-menu-1-focus-item ast-builder-layout-element site-header-focus-item" data-section="section-hb-menu-1">
+                  <div className="ast-builder-menu-1 ast-builder-menu ast-flex ast-builder-menu-1-focus-item ast-builder-layout-element site-header-focus-item" >
                     <div className="ast-main-header-bar-alignment">
                       <div className="main-header-bar-navigation">
                         <nav className="ast-flex-grow-1 navigation-accessibility site-header-focus-item" id="site-navigation">
                           <div className="main-navigation ast-inline-flex">
                             <ul id="ast-hf-menu-1" className="main-header-menu ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-fade  stack-on-mobile" >
                               <li id="menu-item-16" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-9 current_page_item menu-item-16">
-                                <a href="https://websitedemos.net/plant-store-02/" className="menu-link">Home</a>
+                                <Link to={`/`} className="menu-link">Home</Link>
                               </li>
                               <li id="menu-item-19" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-19">
                                 <a href="https://websitedemos.net/plant-store-02/store/" className="menu-link">
