@@ -43,7 +43,7 @@ function Login() {
     <Layout productsInCart={[]}>
       <main>
         {/* breadcrumb-area-start */}
-        <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")' }}>
+        {/* <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")' }}>
           <div className="container">
             <div className="row">
               <div className="col-xl-12">
@@ -57,7 +57,7 @@ function Login() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* breadcrumb-area-end */}
         {/* login Area Strat*/}
         <section className="login-area pt-100 pb-100">
