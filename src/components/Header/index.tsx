@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMediaQuery } from "@material-ui/core";
+// import { useMediaQuery } from "@material-ui/core";
 
 import MobileHeader from './MobileHeader';
-import Cart from '../Cart';
+// import Cart from '../Cart';
 
 const Header = () => {
-  const isMobileScreen = useMediaQuery("(max-width: 575px)");
+  // const isMobileScreen = useMediaQuery("(max-width: 575px)");
   return (
     // <div id="header-sticky" className="header-area box-90 sticky-header">
     //   <div className="container-fluid">

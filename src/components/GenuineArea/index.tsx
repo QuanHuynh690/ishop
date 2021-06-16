@@ -6,7 +6,7 @@ import ProductItem from '../ProductItem';
 
 
 const GenuineArea = () => {
-  const { data: dataGenuineProducts, loading: gettingProducts, error: errorProducts } = useQuery<
+  const { data: dataGenuineProducts } = useQuery<
     GetProductsData,
     GetProductVariables
   >(GET_PRODUCTS, {

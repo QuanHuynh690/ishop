@@ -174,7 +174,7 @@ function Login() {
                         <label htmlFor="remember">Remember me!</label>
                       </span>
                       <span className="forgot-login f-right">
-                        <a href="#">Lost your password?</a>
+                        <Link to={`/`}>Lost your password?</Link>
                       </span>
                     </div>
                     <button className="btn theme-btn-2 w-100">Login Now</button>

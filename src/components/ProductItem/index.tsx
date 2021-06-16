@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useState } from "react";
-import { Link } from 'react-router-dom'
+// import { useState } from "react";
+// import { Link } from 'react-router-dom'
 /*
 1. lấy đc sự kiện click của icon add to cart
 2. tạo 1 array cho những sự kiện trong cart
@@ -11,10 +11,10 @@ import { Link } from 'react-router-dom'
 function ProductItem(props: any) {
   // console.log(props:any.image)
 
-  const onAddToCart = () => {
-    console.log(props)
-    props.clickToAdd(props)
-  }
+  // const onAddToCart = () => {
+  //   console.log(props)
+  //   props.clickToAdd(props)
+  // }
   let discount = props.price_discount.valueOf()
   let discountValue = Number(discount.slice(1, discount.length).slice(0, discount.length - 2))
   let beforeDiscount = Math.round(props?.sale_price * (100 + discountValue) / 100).toLocaleString('vi-VN') + ' ₫ '

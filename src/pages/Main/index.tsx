@@ -13,33 +13,33 @@ import GenuineArea from '../../components/GenuineArea';
 import AskArea from '../../components/AskArea/AskArea';
 
 function Main() {
-  const value = useContext(ThemeContext)
+  // const value = useContext(ThemeContext)
   const [propsOnClick, setPropsOnClick] = useState([])
-  const getProductToCart = (elm: any) => {
-    let newPropsOnClick = [...propsOnClick, elm]
-    // setPropsOnClick(newPropsOnClick)
-    // console.log(props:anyOnClick)
-  }
-  const sortNameAZ = () => {
-    console.log("sortAZ")
-    const newProductSort = [...products].sort((a, b) => a.name.localeCompare(b.name))
-    setProducts(newProductSort)
-  }
+  // const getProductToCart = (elm: any) => {
+  //   let newPropsOnClick = [...propsOnClick, elm]
+  //   // setPropsOnClick(newPropsOnClick)
+  //   // console.log(props:anyOnClick)
+  // }
+  // const sortNameAZ = () => {
+  //   console.log("sortAZ")
+  //   const newProductSort = [...products].sort((a, b) => a.name.localeCompare(b.name))
+  //   setProducts(newProductSort)
+  // }
 
-  const [products, setProducts] = useState(dataProduct.data)
-  const sortNameZA = () => {
-    console.log("sortZA")
-    const newProductSort = [...products].sort((a, b) => b.name.localeCompare(a.name))
-    setProducts(newProductSort)
-  }
+  // const [products, setProducts] = useState(dataProduct.data)
+  // const sortNameZA = () => {
+  //   console.log("sortZA")
+  //   const newProductSort = [...products].sort((a, b) => b.name.localeCompare(a.name))
+  //   setProducts(newProductSort)
+  // }
 
-  const AZ = () => {
-    let newProducts = [...products].sort(function (a, b) {
-      return a.name.localeCompare(b.name)
-      setProducts(newProducts)
-    }
-    )
-  }
+  // const AZ = () => {
+  //   let newProducts = [...products].sort(function (a, b) {
+  //     return a.name.localeCompare(b.name)
+  //     setProducts(newProducts)
+  //   }
+  //   )
+  // }
 
   return (
     <Layout productsInCart={propsOnClick}>
