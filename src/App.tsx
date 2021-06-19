@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import Layout from "./components/Layout";
 import Content from "./components/Content";
 import ProductItem from "./components/ProductItem";
@@ -8,7 +8,7 @@ import SideBar from "./components/SideBar";
 import Login from "./components/Login"
 import Cart from "./components/Cart"
 import dataProduct from "./product.json"
-import './scss/fontawesome-all.min.scss';
+import './scss/main.css';
 import Banner from "./components/BannerArea";
 
 const App = () => {

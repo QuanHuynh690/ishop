@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import { useMediaQuery } from "@material-ui/core";
-
+import logo from '../../assets/images/logo_shop.png'
 import MobileHeader from './MobileHeader';
 // import Cart from '../Cart';
 
@@ -81,7 +81,7 @@ const Header = () => {
                   <div className="ast-builder-layout-element ast-flex site-header-focus-item">
                     <div className="site-branding ast-site-identity">
                       <span className="site-logo-img">
-                        <Link to={`/`}><img src="./assets/logo_shop.png" alt="Shop!" /></Link>
+                        <Link to={`/`}><img src={logo} alt="Shop!" /></Link>
                       </span>
                       <div className="ast-site-title-wrap">
                       </div>
@@ -121,7 +121,7 @@ const Header = () => {
                                 <a href="https://websitedemos.net/plant-store-02/contact-us/" className="menu-link">Contact Us</a>
                               </li>
                               <li id="menu-item-21" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
-                                <a href="https://websitedemos.net/plant-store-02/my-account/" className="menu-link">My Account</a>
+                                <Link to={`/login`} className="menu-link">My Account</Link>
                               </li>
                             </ul>
                           </div>

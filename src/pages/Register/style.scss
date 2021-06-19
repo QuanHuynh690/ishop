@@ -1,0 +1,42 @@
+.ast-article-single {
+  padding: 5.34em 6.67em;
+}
+.entry-title {
+  font-size: 2rem;
+}
+label {
+  margin-bottom: 0 !important;
+}
+.form-row {
+  display: block !important;
+}
+.login-button {
+  border-radius: 50px;
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-bottom: 16px;
+  padding-left: 32px;
+  font-size: 15px;
+}
+.second-button {
+  border-radius: 50px;
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-bottom: 16px;
+  padding-left: 32px;
+  font-size: 15px;
+  background-color: #5d6167 !important;
+}
+.second-button:hover {
+  background-color: #464a4e !important;
+}
+.choose-auth {
+  display: flex;
+  width: 380px;
+  align-items: center;
+  justify-content: space-between;
+}
+.error-input{
+  border: 1px solid red !important;
+  background-color: #e4beb7 !important;
+}

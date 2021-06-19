@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import "./style.css";
+import "./style.scss";
 function Login() {
   const [login, setLogin] = useState({
     email: "",
@@ -99,7 +99,6 @@ function Login() {
                               name="rememberme"
                               type="checkbox"
                               id="rememberme"
-                              defaultValue="forever"
                             />{" "}
                             <span>Remember me</span>
                           </label>
@@ -140,7 +139,7 @@ function Login() {
         </div>
 
         {/* login Area Strat*/}
-        <section className="login-area pt-100 pb-100">
+        {/* <section className="login-area pt-100 pb-100">
           <div className="container">
             <div className="row">
               <div className="col-lg-8 offset-lg-2">
@@ -189,7 +188,7 @@ function Login() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* login Area End*/}
       </main>
     </Layout>

@@ -14,7 +14,7 @@ import dataProduct from './product.json';
 import LoadingComponent from './components/LoadingComponent'
 
 import './scss/fontawesome-all.min.scss'
-
+import './scss/index.scss'
 export const ThemeContext = React.createContext('light');
 const MainPage = React.lazy(() => import('./pages/Main'));
 const LoginPage = React.lazy(() => import('./pages/Login'));
