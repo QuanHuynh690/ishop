@@ -1,16 +1,15 @@
 import React from 'react';
 import { useState, useContext } from "react";
-import "./Main.css";
 import Layout from "../../components/Layout";
 import Content from "../../components/Content";
 import ProductItem from "../../components/ProductItem";
 import SideBar from "../../components/SideBar";
 import dataProduct from '../../product.json';
 import { ThemeContext } from '../..';
-import Banner from '../../components/BannerArea';
-import CategoryArea from '../../components/CategoryArea';
-import GenuineArea from '../../components/GenuineArea';
-import AskArea from '../../components/AskArea/AskArea';
+import Banner from '../../components/Area/BannerArea';
+import CategoryArea from '../../components/Area/CategoryArea';
+import GenuineArea from '../../components/Area/GenuineArea';
+import AskArea from '../../components/Area/AskArea/AskArea';
 
 function Main() {
   // const value = useContext(ThemeContext)
@@ -44,7 +43,7 @@ function Main() {
   return (
     <Layout productsInCart={propsOnClick}>
       <main>
-        <Banner />
+        <Banner title='Amazing Variety Of Technology Products' page='home'/>
         <CategoryArea/>
         <GenuineArea/>
         <AskArea/>

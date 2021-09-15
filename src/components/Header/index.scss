@@ -1,0 +1,129 @@
+.site-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 99;
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -ms-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+}
+.header-container {
+  max-width: 1280px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  height: 70px;
+  padding: 0 40px;
+}
+.site-header-section {
+  height: 100%;
+  min-height: 0;
+  align-items: center;
+}
+.ast-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.header-menu {
+  align-items: center;
+}
+
+.header-menu .menu-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.header-menu .menu-link {
+  padding: 0 10px;
+}
+.menu-link.active {
+  color: var(--ast-global-color-1);
+}
+.header-menu .sub-menu-link {
+  padding: 5px 10px;
+}
+.header-menu .menu-item:hover .menu-link {
+  color: var(--ast-global-color-1);
+}
+#store-menu .sub-menu {
+  display: none;
+}
+#store-menu:hover .sub-menu {
+  display: block;
+  width: 240px;
+  background: #fff;
+  left: 65px;
+  position: absolute;
+  top: 60px;
+  z-index: 99999;
+  transition: opacity ease-in-out 5.9s;
+  box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+  border-top: solid 2px var(--ast-global-color-0);
+}
+.main-navigation {
+  height: 100%;
+}
+.main-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  position: relative;
+}
+.site-header-section > * {
+  padding: 0 10px 0 0;
+}
+.cart-container {
+  transition: all 0.2s linear;
+  color: var(--ast-global-color-1);
+}
+.header-count:hover {
+  color: var(--ast-global-color-2);
+  background-color: var(--ast-global-color-1);
+  border: var(--ast-global-color-1) solid 2px;
+}
+.header-count:hover:after {
+  border: var(--ast-global-color-1) solid 2px;
+}
+.cart-container:hover {
+  color: var(--ast-global-color-1);
+}
+.header-count {
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  min-width: 27px;
+  min-height: 27px;
+  font-size: 13px;
+  line-height: 1.8;
+  border-width: 2px;
+  border-style: solid;
+  padding: 0 6px;
+  border-radius: 3px;
+}
+.header-count:after {
+  bottom: 100%;
+  margin-bottom: 0;
+  height: 10px;
+  width: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -7px;
+  content: " ";
+  position: absolute;
+  pointer-events: none;
+  border-width: 2px;
+  border-style: solid;
+  border-top-left-radius: 160px;
+  border-top-right-radius: 160px;
+  border-bottom: 0;
+}
+@media (max-width: 425px) {
+  .pc-header {
+    display: none;
+  }
+}

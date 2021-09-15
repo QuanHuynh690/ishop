@@ -1,0 +1,36 @@
+.main-content {
+  max-width: 90%;
+  margin-top: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding: 64px 40px;
+  background-color: #f9f9f9;
+}
+.content-area {
+  width: 80%;
+  padding-left: 20px;
+}
+.products {
+  margin-top: 50px;
+  display: grid;
+  column-gap: 20px;
+  row-gap: 40px;
+  list-style-type: none;
+  padding-left: 0;
+}
+.sort-container {
+  display: flex;
+  justify-content: space-between;
+}
+.orderby {
+  padding: 8px;
+  border: 1px solid var(--ast-global-color-10);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--ast-global-color-5);
+  background-color: #fafafa;
+}
+.result-count {
+  color: var(--ast-global-color-5);
+}

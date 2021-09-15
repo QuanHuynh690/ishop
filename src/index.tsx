@@ -20,6 +20,8 @@ const MainPage = React.lazy(() => import('./pages/Main'));
 const LoginPage = React.lazy(() => import('./pages/Login'));
 const RegisterPage = React.lazy(() => import('./pages/Register'));
 const DetailPage = React.lazy(() => import('./pages/ProductDetail'));
+const StorePage = React.lazy(() => import('./pages/Store'));
+const CameraPage = React.lazy(() => import('./pages/Camera'));
 Sentry.init({
   dsn: "https://1cbe78c6c5104852a5c18c3c87174338@o718327.ingest.sentry.io/5780730",
   integrations: [new Integrations.BrowserTracing()],
@@ -44,7 +46,9 @@ ReactDOM.render(
               <Route exact path="/" component={MainPage} />
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
-              <Route exact path="/productdetail/:id" component={DetailPage} />
+              <Route exact path="/store" component={StorePage} />
+              <Route exact path="/store/camera" component={CameraPage} />
+              <Route exact path="/store/:slug" component={DetailPage} />
               {/* <Route exact path='/'>
             <Main />
           </Route>

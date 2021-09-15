@@ -1,141 +1,68 @@
-import * as React from 'react'
+import * as React from "react";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
+import "./index.scss";
 function SideBar(props: any) {
   const sortAToZ = () => {
-    return props.onSortAZ(props)
-  }
-  const [search, setSearch] = useState("")
+    return props.onSortAZ(props);
+  };
+  const [search, setSearch] = useState("");
   const inputSearch = (event: any) => {
-    setSearch(event.target.value)
+    setSearch(event.target.value);
     // console.log(event.target.value)
-  }
+  };
   const submit = (e: any) => {
     e.preventDefault();
-    console.log(search)
-  }
+    console.log(search);
+  };
   return (
     <>
       {/*SideBar */}
-      <div className="col-xl-3 col-lg-4">
-        <div className="sidebar-shop">
-          <div className="shop-widget">
-            <h3 className="shop-title" >Search by</h3>
-            <form action="#" className="shop-search" onSubmit={submit}>
-              <input type="text" placeholder="Your keyword...." onChange={inputSearch} />
-              <button>
-                <i className="fa fa-search" />
-              </button>
-            </form>
-          </div>
-          {/* 
-                        <div class="shop-widget">
-                            <h3 class="shop-title">Filter selection</h3>
-                            <div class="price-filter">
-                                <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 15%; width: 45%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 15%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 60%;"></span></div>
-                                <input type="text" id="amount">
-                            </div>
-                        </div> */}
-          <div className="shop-widget">
-            <h3 className="shop-title">SHOP BY</h3>
-            <ul className="shop-link">
-              <li>
-                <a href="#" onClick={sortAToZ}>Name: A-Z</a>
-              </li>
-              <li>
-                <a href="#">Name: Z-A</a>
-              </li>
-              <li>
-                <a href="#">Price: High to Low</a>
-              </li>
-              <li>
-                <a href="#">Price: Low to High</a>
-              </li>
-              <li>
-                <a href="#">Product: Top Sales</a>
-              </li>
-            </ul>
-          </div>
-          <div className="shop-widget">
-            <h3 className="shop-title">Recent Product</h3>
-            <ul className="shop-sidebar-product">
-              <li>
-                <div className="side-pro-img">
-                  <a href="#">
-                    <img src="./assets/shop-rsp3.jpg" alt="" />
-                  </a>
-                </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5>
-                    <a href="#">Raglan Baseball-Style</a>
-                  </h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="side-pro-img">
-                  <a href="#">
-                    <img src="./assets/shop-rsp2.jpg" alt="" />
-                  </a>
-                </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5>
-                    <a href="#">Raglan Baseball-Style</a>
-                  </h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="side-pro-img">
-                  <a href="#">
-                    <img src="./assets/shop-rsp4.jpg" alt="" />
-                  </a>
-                </div>
-                <div className="side-pro-content">
-                  <div className="side-pro-rating">
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                    <i className="fas fa-star" />
-                  </div>
-                  <h5>
-                    <a href="#">Raglan Baseball-Style</a>
-                  </h5>
-                  <div className="side-pro-price">
-                    <span>$119.00 USD</span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className="shop-widget">
-            <div className="shop-sidebar-banner">
-              <a href="#">
-                <img src="./assets/shop-banner.jpg" alt="" />
-              </a>
-            </div>
-          </div>
+      <div className="sidebar-container">
+        <form
+          role="search"
+          method="get"
+          className="product-search"
+          action="https://websitedemos.net/furniture-store-03/"
+        >
+          <input
+            className="search-field"
+            placeholder="Search products…"
+            name="s"
+          />
+          <button type="submit" value="Search" className="search-button">
+            Search
+          </button>
+          <input type="hidden" name="post_type" defaultValue="product" />
+        </form>
+        <div className="category-container">
+          <h2 className="sidebar-title">Product categories</h2>
+          <ul className="product-categories">
+            <li className="cat-item cat-item-22">
+              <Link to="/store?cat=dien-thoai-smartphone">
+                Smart Phone
+              </Link>{" "}
+              <span className="count">(2)</span>
+            </li>
+            <li className="cat-item cat-item-23">
+              <Link to="/store?cat=May-tinh-bang">
+                Tablet
+              </Link>{" "}
+              <span className="count">(7)</span>
+            </li>
+            <li className="cat-item cat-item-24">
+              <Link to="/store?cat=May-Anh">
+                Camera
+              </Link>{" "}
+              <span className="count">(2)</span>
+            </li>
+          </ul>
+        </div>
+        <div className="widget woocommerce widget_price_filter">
+          <h2 className="sidebar-title">Filter by price</h2>
         </div>
       </div>
+
       {/* /SideBar */}
     </>
   );

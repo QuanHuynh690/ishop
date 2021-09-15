@@ -9,7 +9,7 @@ import Login from "./components/Login"
 import Cart from "./components/Cart"
 import dataProduct from "./product.json"
 import './scss/main.css';
-import Banner from "./components/BannerArea";
+import Banner from "./components/Area/BannerArea";
 
 const App = () => {
 

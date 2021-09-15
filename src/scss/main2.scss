@@ -1953,7 +1953,7 @@ body .entry-content .wp-block-latest-posts li {
 }
 
 .widget_search .search-form i {
-    color: #3a3a3a
+    color: var(--ast-global-color-7)
 }
 
 .widget_search .search-form button {
@@ -2243,7 +2243,7 @@ body .entry-content .wp-block-latest-posts li {
 
 .ast-builder-social-element {
     line-height: 1;
-    color: #3a3a3a;
+    color: var(--ast-global-color-7);
     background: 0 0;
     vertical-align: middle;
     transition: all 10ms;
