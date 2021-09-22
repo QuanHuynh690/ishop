@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
-import dataProduct from "../../product.json";
 import { withRouter, useParams, Link } from "react-router-dom";
-import { AppBar, Tabs, Tab, Typography, Box } from "@material-ui/core";
-import { makeStyles, withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { Tabs, Tab, Typography, Box } from "@material-ui/core";
+import {
+  withStyles,
+  Theme,
+  createStyles,
+  makeStyles,
+} from "@material-ui/core/styles";
 import { useQuery } from "@apollo/client";
 import {
   GET_PRODUCT,
@@ -12,6 +16,9 @@ import {
 } from "../../graphql/product/product.query";
 import LoadingComponent from "../../components/LoadingComponent";
 import "./index.scss";
+import { images } from "../../assets";
+import Modal from "../../components/Modal";
+import Rating from 'react-rating'
 type Params = {
   slug: string;
 };
@@ -20,10 +27,6 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
-interface StyledTabsProps {
-  value: number;
-  onChange: (event: React.ChangeEvent<{}>, newValue: number) => void;
-}
 interface StyledTabProps {
   label: string;
 }
@@ -31,6 +34,9 @@ function ProductDetail(props: any) {
   // dùng useParams()
   const { slug }: Params = useParams();
   const id = Number(slug.slice(-8));
+  const [viewImage, setViewImage] = useState("");
+  const [viewImageModal, setViewImageModal] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   console.log("ProductDetail Props", props);
 
   // dùng withRouter
@@ -46,7 +52,6 @@ function ProductDetail(props: any) {
   const [value, setValue] = React.useState(0);
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
-
     return (
       <div
         role="tabpanel"
@@ -56,38 +61,27 @@ function ProductDetail(props: any) {
         {...other}
       >
         {value === index && (
-          <Box p={3}>
+          <Box>
             <Typography>{children}</Typography>
           </Box>
         )}
       </div>
     );
   }
-  const StyledTabs = withStyles({
+  const useStyle = makeStyles({
     indicator: {
-      display: 'flex',
-      justifyContent: 'center',
-      backgroundColor: 'transparent',
-      '& > span': {
-        width: '100%',
-        backgroundColor: '#635ee7',
-      },
+      top: "0px",
     },
-  })((props: StyledTabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+  });
+  const classes = useStyle();
   const StyledTab = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      textTransform: 'none',
-      color: '#ee6457',
-      fontWeight: theme.typography.fontWeightRegular,
-      fontSize: theme.typography.pxToRem(15),
-      marginRight: theme.spacing(1),
-      '&:focus': {
-        opacity: 1,
+    createStyles({
+      root: {
+        textTransform: "none",
+        width: "auto",
       },
-    },
-  }),
-)((props: StyledTabProps) => <Tab {...props} />);
+    })
+  )((props: StyledTabProps) => <Tab {...props} />);
   function a11yProps(index: any) {
     return {
       id: `simple-tab-${index}`,
@@ -96,6 +90,9 @@ function ProductDetail(props: any) {
   }
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+  const handleClose = () => {
+    setOpenModal(false);
   };
   return (
     <>
@@ -109,30 +106,34 @@ function ProductDetail(props: any) {
             <section className="product-detail-area">
               <div className="product-detail">
                 <div className="product-details-img mb-10">
-                  <div className="tab-content" id="myTabContentpro">
-                    <div className="tab-pane fade show active">
-                      {/* <div className="product-large-img"> */}
-                      <img
-                        width="100%"
-                        src={dataProduct?.getProduct?.thumbnailImage}
-                        alt=""
-                      />
-                      {/* </div> */}
-                    </div>
+                  <div className="detail-thumbnail">
+                    <img
+                      width="100%"
+                      src={viewImage || dataProduct?.getProduct?.thumbnailImage}
+                      alt=""
+                    />
+                    <span
+                      className="view-big-image"
+                      onClick={() => setOpenModal(true)}
+                    >
+                      <images.Search />
+                    </span>
                   </div>
-                  <div className="shop-thumb-tab mb-30">
-                    <ul className="nav" id="myTab2" role="tablist">
-                      {dataProduct?.getProduct?.images.map((image, index) => {
-                        return (
-                          <li className="nav-item" key={index}>
-                            <a className="nav-link active" href="#home">
-                              <img src={image} width="64" alt="" />{" "}
-                            </a>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
+                  <ul className="sub-image-list">
+                    {dataProduct?.getProduct?.images.map((image, index) => {
+                      return (
+                        <li
+                          className="sub-image"
+                          key={index}
+                          onClick={() => {
+                            setViewImage(image);
+                          }}
+                        >
+                          <img src={image} width="64" alt="" />{" "}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
                 <div className="product-details">
                   <nav className="detail-breadcrumb">
@@ -188,314 +189,82 @@ function ProductDetail(props: any) {
                   </div>
                 </div>
               </div>
-              <div className="row">
-                <AppBar position="static" color="default">
-                  <StyledTabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="styled tabs example"
-                  >
-                    <StyledTab label="Description" {...a11yProps(0)} />
-                    <StyledTab label="Reviews" {...a11yProps(1)} />
-                  </StyledTabs>
-                </AppBar>
+              <div className="description-container">
+                {/* <AppBar position="static" color="default"> */}
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="styled tabs example"
+                  indicatorColor="secondary"
+                  textColor="secondary"
+                  classes={{
+                    indicator: classes.indicator,
+                  }}
+                >
+                  <StyledTab label="Description" {...a11yProps(0)} />
+                  <StyledTab label="Reviews" {...a11yProps(1)} />
+                </Tabs>
+                {/* </AppBar> */}
                 <TabPanel value={value} index={0}>
-                  Item One
+                  <span>
+                    Nam nec tellus a odio tincidunt auctor a ornare odio. Sed
+                    non mauris vitae erat consequat auctor eu in elit. Class
+                    aptent taciti sociosqu ad litora torquent per conubia
+                    nostra, per inceptos himenaeos. Mauris in erat justo. Nullam
+                    ac urna eu felis dapibus condimentum sit amet a augue. Sed
+                    non neque elit sed.
+                  </span>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                  Item Two
+                  <div>
+                    <h5>Reviews</h5>
+                    <span>There are no reviews yet</span>
+                    <div className="review-container">
+                      <span className="review-title">
+                        Be the first to review "{dataProduct?.getProduct?.name}"
+                      </span>
+                      <form>
+                        <span>
+                          Your email address will not be published. Required
+                          fields are marked *
+                        </span><br/>
+                        <span>Your rating </span><span className="required-label">(*)</span><br/>
+                        <Rating/>
+                        
+                      </form>
+                    </div>
+                  </div>
                 </TabPanel>
               </div>
+              <Modal open={openModal} handleClose={handleClose}>
+                <div>
+                  <div className="modal-thumpnail-image">
+                    <img
+                      src={
+                        viewImageModal ||
+                        dataProduct?.getProduct?.thumbnailImage
+                      }
+                      alt=""
+                    />
+                  </div>
+                  <ul className="sub-image-list">
+                    {dataProduct?.getProduct?.images.map((image, index) => {
+                      return (
+                        <li
+                          className="sub-image"
+                          key={index}
+                          onClick={() => {
+                            setViewImageModal(image);
+                          }}
+                        >
+                          <img src={image} width="64" alt="" />{" "}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </Modal>
             </section>
-            {/* shop-area end */}
-            {/* product-area start */}
-            {/* <section className="product-area pb-100">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-12">
-                <div className="area-title text-center mb-50">
-                  <h2>Releted Products</h2>
-                  <p>Browse the huge variety of our products</p>
-                </div>
-              </div>
-            </div>
-            <div className="product-slider-2 owl-carousel">
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro4.jpg" alt="" />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro5.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <Link to={`/`} title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </Link>
-                      <Link to={`/`} title="Quick View">
-                        <i className="flaticon-eye" />
-                      </Link>
-                      <Link
-                        to={`/`}
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <Link to={`/`}>
-                        <i className="far fa-heart" title="Wishlist" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro5.jpg" alt="" />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro6.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <Link to={`/`} title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </Link>
-                      <Link to={`/`} title="Quick View">
-                        <i className="flaticon-eye" />
-                      </Link>
-                      <Link
-                        to={`/`}
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </Link>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <Link to={`/`}>
-                        <i className="far fa-heart" title="Wishlist" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro7.jpg" alt="" />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro8.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <Link to={`/`} title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </Link>
-                      <Link to={`/`} title="Quick View">
-                        <i className="flaticon-eye" />
-                      </Link>
-                      <Link
-                        to={`/`}
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <Link to={`/`}>
-                        <i className="far fa-heart" title="Wishlist" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro9.jpg" alt="" />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro10.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <Link to={`/`} title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </Link>
-                      <Link to={`/`} title="Quick View">
-                        <i className="flaticon-eye" />
-                      </Link>
-                      <Link
-                        to={`/`}
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </Link>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <Link to={`/`}>
-                        <i className="far fa-heart" title="Wishlist" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="pro-item">
-                <div className="product-wrapper">
-                  <div className="product-img mb-25">
-                    <a href="product-details.html">
-                      <img src="img/product/pro1.jpg" alt="" />
-                      <img
-                        className="secondary-img"
-                        src="img/product/pro11.jpg"
-                        alt=""
-                      />
-                    </a>
-                    <div className="product-action text-center">
-                      <Link to={`/`} title="Shoppingb Cart">
-                        <i className="flaticon-shopping-cart" />
-                      </Link>
-                      <Link to={`/`} title="Quick View">
-                        <i className="flaticon-eye" />
-                      </Link>
-                      <Link
-                        to={`/`}
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Compare"
-                      >
-                        <i className="flaticon-compare" />
-                      </Link>
-                    </div>
-                    <div className="sale-tag">
-                      <span className="new">new</span>
-                      <span className="sale">sale</span>
-                    </div>
-                  </div>
-                  <div className="product-content">
-                    <div className="pro-cat mb-10">
-                      <a href="shop.html">decor, </a>
-                      <a href="shop.html">furniture</a>
-                    </div>
-                    <h4>
-                      <a href="product-details.html">
-                        Raglan Baseball Style shirt
-                      </a>
-                    </h4>
-                    <div className="product-meta">
-                      <div className="pro-price">
-                        <span>$119.00 USD</span>
-                        <span className="old-price">$230.00 USD</span>
-                      </div>
-                    </div>
-                    <div className="product-wishlist">
-                      <Link to={`/`}>
-                        <i className="far fa-heart" title="Wishlist" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-            {/* product-area end */}
           </main>
         </Layout>
       )}

@@ -15,6 +15,8 @@ import LoadingComponent from './components/LoadingComponent'
 
 import './scss/fontawesome-all.min.scss'
 import './scss/index.scss'
+import { ThemeProvider } from '@material-ui/core';
+import { muiTheme } from './theme';
 export const ThemeContext = React.createContext('light');
 const MainPage = React.lazy(() => import('./pages/Main'));
 const LoginPage = React.lazy(() => import('./pages/Login'));
@@ -36,6 +38,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 ReactDOM.render(
+  <ThemeProvider theme={muiTheme}>
   <ApolloProvider client={client}>
     <React.StrictMode>
       <Router>
@@ -88,7 +91,9 @@ ReactDOM.render(
         </React.Suspense>
       </Router>
     </React.StrictMode>
-  </ApolloProvider>,
+  </ApolloProvider>
+  </ThemeProvider >
+  ,
   document.getElementById('root')
 );
 

@@ -12,14 +12,14 @@ import { createMuiTheme } from '@material-ui/core';
 
 const muiTheme = createMuiTheme({
   typography: {
-    fontFamily: "'UTM AVO', Arial, Helvetica, sans-serif"
+    fontFamily: "Poppins, sans-serif"
   },
   palette: {
     primary: {
-      main: '#2f3b97'
+      main: '#ee6457'
     },
     secondary: {
-      main: '#ffcb31'
+      main: '#034c5f'
     },
     grey: {
       '500': '#adb5bd'
