@@ -18,7 +18,7 @@ import LoadingComponent from "../../components/LoadingComponent";
 import "./index.scss";
 import { images } from "../../assets";
 import Modal from "../../components/Modal";
-import Rating from 'react-rating'
+import RatingCom from "../../components/Rating";
 type Params = {
   slug: string;
 };
@@ -227,10 +227,12 @@ function ProductDetail(props: any) {
                         <span>
                           Your email address will not be published. Required
                           fields are marked *
-                        </span><br/>
-                        <span>Your rating </span><span className="required-label">(*)</span><br/>
-                        <Rating/>
-                        
+                        </span>
+                        <br />
+                        <span>Your rating </span>
+                        <span className="required-label">(*)</span>
+                        <br />
+                        <RatingCom />
                       </form>
                     </div>
                   </div>

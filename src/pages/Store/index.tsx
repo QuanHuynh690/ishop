@@ -60,8 +60,6 @@ function Store() {
                   </p>
                   <select name="orderby" className="orderby">
                     <option value="menu_order">Default sorting</option>
-                    <option value="popularity">Sort by name A-Z</option>
-                    <option value="rating">Sort by name Z-A</option>
                     <option value="price">Sort by price: low to high</option>
                     <option
                       value="price-desc"
